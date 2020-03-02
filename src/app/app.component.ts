@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+
+interface Accusation {
+  accuser: string;
+  accused: string;
+  paragraf: string;
+  punishment: number;
+}
 
 @Component({
   selector: 'app-root',
@@ -6,5 +14,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angulartest';
+  public accusses: AngularFireList<Accusation>;
+  constructor(private db: AngularFireDatabase) {
+    this.accusses = this.db.list('/accusses');
+  }
 }
